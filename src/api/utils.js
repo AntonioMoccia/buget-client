@@ -18,3 +18,13 @@ export const getData = (url = '') => {
         }
     }).then(res => res.json())
 }
+export const putData = (url = '',data={}) => {
+    return fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body:JSON.stringify(data)
+    }).then(res => res.json())
+}

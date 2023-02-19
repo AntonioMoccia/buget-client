@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Table, FloatButton } from 'antd'
-import { BsPlusLg } from 'react-icons/bs'
+import { BsPlusLg , BsArrow90DegDown} from 'react-icons/bs'
 
 import { useDispatch, useSelector } from 'react-redux'
 
 import TransactionColumns from '../../Config/Tables/transaction'
 
-import { setTransactionsData, setModalInsert } from '../../redux/transactions/transactionSlice'
+import { setTransactionsData, setModalInsert,setModalUpdate,setSelectedRowUpdate } from '../../redux/transactions/transactionSlice'
 import { getTransaction } from '../../api'
 import InsertModal from './components/InsertModal'
-
+import { ArrowDownOutlined } from '@ant-design/icons'
+import UpdateModal from './components/UpdateModal'
 
 function TransactionPage() {
 
@@ -26,20 +27,42 @@ function TransactionPage() {
     }, [])
     return (
         <>
-
+            <UpdateModal />
             <InsertModal />
             <Table
+            onRow={(record,rowIndex)=>{ 
+                return {
+                    onContextMenu:(event)=>{
+                        event.preventDefault()
+                        dispatch(setSelectedRowUpdate(record))
+                        dispatch(setModalUpdate(true))
+                    }
+                }
+            }}
+               pagination={{
+                pageSize:undefined,
+                position: ['topLeft'],
+              }}
                 loading={loadingTableData}
                 className="mt-5"
                 columns={TransactionColumns}
                 dataSource={transactionData}
             />
+            <FloatButton.Group>
+
             <FloatButton
                 icon={<BsPlusLg />}
                 onClick={() => {
                     dispatch(setModalInsert(true))
                 }}
-            />
+                />
+            <FloatButton
+                icon={<ArrowDownOutlined />}
+                onClick={() => {
+                    dispatch(setModalUpdate(true))
+                }}
+                />
+                </FloatButton.Group>
         </>
     )
 }

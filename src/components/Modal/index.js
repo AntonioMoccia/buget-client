@@ -1,7 +1,7 @@
 import { Button, Modal } from 'antd';
 import { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
-const AMModal = ({ ContentModal, open, setOpen, ModalTitle,onOk,onCancel }) => {
+const AMModal = ({ ContentModal, open, setOpen, ModalTitle,onOk,onCancel , onText}) => {
   const [disabled, setDisabled] = useState(false);
   const [bounds, setBounds] = useState({
     left: 0,
@@ -10,9 +10,7 @@ const AMModal = ({ ContentModal, open, setOpen, ModalTitle,onOk,onCancel }) => {
     right: 0,
   });
   const draggleRef = useRef(null);
-  const showModal = () => {
-    setOpen(true);
-  };
+
   const onStart = (_event, uiData) => {
     const { clientWidth, clientHeight } = window.document.documentElement;
     const targetRect = draggleRef.current?.getBoundingClientRect();
@@ -37,7 +35,7 @@ const AMModal = ({ ContentModal, open, setOpen, ModalTitle,onOk,onCancel }) => {
             backgroundColor: 'green'
           }
         }}
-        okText={'Save'}
+        okText={onText}
         title={
           <div
             style={{
