@@ -29,6 +29,10 @@ function TransactionPage() {
 
             <InsertModal />
             <Table
+               pagination={{
+                pageSize:undefined,
+                position: ['topLeft'],
+              }}
                 loading={loadingTableData}
                 className="mt-5"
                 columns={TransactionColumns}
