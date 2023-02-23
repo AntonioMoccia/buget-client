@@ -17,7 +17,6 @@ function UpdateModal() {
     }
     //aggiungo allo store redux
     const handleAddToFormUpdate = (name, value) => {
-        console.log(name,value);
         dispatch(addToFormUpdate({ name: name, value: value }))
     }
     //metodo che richiama la funzione per l'aggiunta dei  valori allo store redux
@@ -25,7 +24,6 @@ function UpdateModal() {
         handleAddToFormUpdate(e.target.name, e.target.value)
     }
     const handleConfirm = () => {
-        console.log(formData);
         updateTransaction(id,formData).then(res => {
                 console.log(res);
             dispatch(updateTransactionState(res.data))

@@ -56,12 +56,12 @@ function TransactionPage() {
                     dispatch(setModalInsert(true))
                 }}
                 />
-            <FloatButton
+{/*             <FloatButton
                 icon={<ArrowDownOutlined />}
                 onClick={() => {
                     dispatch(setModalUpdate(true))
                 }}
-                />
+                /> */}
                 </FloatButton.Group>
         </>
     )
