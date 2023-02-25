@@ -6,7 +6,7 @@ export default [
     {
         title: 'Category',
         key: 'category',
-        dataIndex: 'category',
+        dataIndex: 'category'
     },
     {
         title: 'Date',

@@ -1,9 +1,10 @@
 import React, { useRef } from 'react'
 import AMInputField from '../../../components/AMInputField'
 import AMModal from '../../../components/Modal'
-import { Form, Space,Input } from 'antd'
+import {format} from 'date-fns'
+import { Form, Space, Input } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
-import { addToFormUpdate, updateTransactionState,  resetForm, setModalUpdate } from '../../../redux/transactions/transactionSlice'
+import { addToFormUpdate, updateTransactionState, resetForm, setModalUpdate } from '../../../redux/transactions/transactionSlice'
 import { updateTransaction } from '../../../api'
 function UpdateModal() {
     const [form] = Form.useForm()
@@ -24,12 +25,12 @@ function UpdateModal() {
         handleAddToFormUpdate(e.target.name, e.target.value)
     }
     const handleConfirm = () => {
-        updateTransaction(id,formData).then(res => {
-                console.log(res);
+        updateTransaction(id, formData).then(res => {
+            console.log(res);
             dispatch(updateTransactionState(res.data))
-           // dispatch(resetForm())
-        
-           setOpenModal(false)
+            // dispatch(resetForm())
+
+            setOpenModal(false)
         })
     }
     const handleCancel = () => {
@@ -38,7 +39,7 @@ function UpdateModal() {
     }
     return (
         <AMModal
-        onText={'Update'}
+            onText={'Update'}
             onOk={handleConfirm}
             onCancel={handleCancel}
             open={openModal}
@@ -60,13 +61,13 @@ function UpdateModal() {
             } />
     )
 }
-const InputUpdateField = ({ label, type, htmlFor, name, onChange })=>{
+const InputUpdateField = ({ label, type, htmlFor, name, onChange }) => {
     const value = useSelector(store => store.transactions.modalUpdate.selectedRow.selectedRowData)[name]
     return (
-      <>
-        <label htmlFor={htmlFor}>{label}</label>
-        <Input onChange={onChange} value={value} type={type} id={htmlFor} name={name} />
-      </>
+        <>
+            <label htmlFor={htmlFor}>{label}</label>
+            <Input onChange={onChange} value={type == 'date' ? format(new Date(value), 'yyyy-MM-dd') : value} type={type} id={htmlFor} name={name} />
+        </>
     )
 }
 
