@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import TransactionColumns from '../../Config/Tables/transaction'
 
-import { setTransactionsData, setModalInsert, setModalUpdate, setSelectedRowUpdate } from '../../redux/transactions/transactionSlice'
+import { setTransactionsData, setModalInsert, setSelectedRow, setSelectedRowUpdate } from '../../redux/transactions/transactionSlice'
 import { getTransaction } from '../../api'
 import InsertModal from './components/InsertModal'
 import { ArrowDownOutlined } from '@ant-design/icons'
@@ -49,6 +49,7 @@ function TransactionPage() {
                         onContextMenu: (event) => {
                             event.preventDefault()
                             dispatch(setSelectedRowUpdate(record))
+                            dispatch(setSelectedRow(record))
                             //
                         }
                     }

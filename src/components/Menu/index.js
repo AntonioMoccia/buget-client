@@ -43,7 +43,7 @@ function ReactMenu() {
                 image
             </div> */}
             <div className="text-gray-100 uppercase w-[100%] font-bold text-center h-16 justify-center flex align-middle flex-col">
-                Antonio Moccia
+               Budget App
             </div>
             <Menu onClick={(e) => {
                 navigate(e.key)
